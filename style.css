@@ -1,0 +1,203 @@
+/* style.css */
+
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.error { 
+    color: red; 
+}
+.success { 
+    color: green; 
+}
+
+/* Шапка */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+}
+
+.header a {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+    background-color: #f2f2f2;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.header a:hover {
+    background-color: #ddd;
+}
+
+/* Контейнер */
+.container {
+    margin: 20px;
+    padding: 15px;
+}
+
+/* Формы */
+.form-group {
+    margin-bottom: 15px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Меню */
+.menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #2e89ff;
+    transition: left 0.3s;
+    padding-top: 30px;
+    z-index: 1000;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    font-size: 18px;
+}
+
+.menu a:hover {
+    background-color: #575757;
+}
+
+.menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #166bd9;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1001;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Сводная таблица */
+.summary-table {
+    display: none;
+    margin-top: 10px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu {
+        width: 200px;
+    }
+
+    .menu-btn {
+        top: 10px;
+        left: 10px;
+        font-size: 15px;
+    }
+
+    .container {
+        margin: 5px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    button {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+    
+    .header a {
+        font-size: 14px;
+        padding: 5px 10px;
+        width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    input, select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+
+    .menu a {
+        font-size: 16px;
+    }
+}
