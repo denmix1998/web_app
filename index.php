@@ -202,194 +202,10 @@ $rows = $stmt->fetchAll();
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Учёт картриджей</title>
+    <title>
+        Учёт картриджей</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .summary-table { display: none; margin-top: 10px; }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .error { color: red; }
-        .success { color: green; }
-        .header a {
-        position: fixed;
-        top: 20px; /* Отступ сверху */
-        right: 20px; /* Отступ справа */
-        font-size: 18px;
-        color: #333;
-        text-decoration: none;
-        background-color: #f2f2f2;
-        padding: 10px 15px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-    }
-
-.header a:hover {
-    background-color: #ddd;
-}
-        /* Стили для выезжающего меню */
-        .menu {
-            position: fixed;
-            top: 0;
-            left: -250px; /* Меню скрыто по умолчанию */
-            width: 250px;
-            height: 100%;
-            background-color: #2e89ff;
-            transition: left 0.3s;
-            padding-top: 30px;
-            z-index: 1000;
-        }
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            display: block;
-            font-size: 18px;
-        }
-
-        .menu a:hover {
-            background-color: #575757;
-        }
-
-        /* Кнопка для выезжающего меню */
-        .menu-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: #166bd9;
-            color: white;
-            padding: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        /* Контент */
-        .container {
-            margin: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .error {
-            color: red;
-            font-size: 14px;
-        }
-
-        .success {
-            color: green;
-            font-size: 14px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        /* Адаптивность для экранов до 768px */
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .menu {
-                width: 200px;
-            }
-
-            .menu-btn {
-                top: 10px;
-                left: 10px;
-                font-size: 15px;
-            }
-
-            .container {
-                margin: 5px;
-            }
-
-            h1 {
-                font-size: 22px;
-            }
-
-            button {
-                width: 100%;
-                font-size: 13px;
-            }
-
-            table {
-                font-size: 14px;
-            }
-
-            th, td {
-                padding: 8px;
-            }
-            .header a {
-        font-size: 14px;
-        padding: 5px 10px;
-        width: auto; /* Отменяем ширину на 100% */
-            }
-        }
-
-        /* Стиль для маленьких экранов (телефоны) */
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 20px;
-            }
-
-            input, select {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            button {
-                font-size: 16px;
-                padding: 12px 20px;
-            }
-
-            .menu a {
-                font-size: 16px;
-            }
-        }
-
-    </style>
 </head>
 <body>
 
@@ -402,14 +218,18 @@ $rows = $stmt->fetchAll();
         <a href="change_password.php">Изменить пароль</a>
     </div>
 
+<?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+
     <!-- Кнопка меню -->
     <div class="menu-btn" onclick="toggleMenu()">☰ Меню</div>
+
+<?php endif; ?>
 
     <!-- Шапка с кнопкой выхода -->
     <div class="header">
         <a href="logout.php">Выйти</a>
     </div>
-
+    <h1>ㅤ</h1>
     <h1>Добро пожаловать, <?= htmlspecialchars($_SESSION['user']) ?></h1>
 
     <?php if ($successMsg): ?>
@@ -420,6 +240,7 @@ $rows = $stmt->fetchAll();
         <p class="error"><?= $errorMsg ?></p>
     <?php endif; ?>
 
+    <div class="form-block">
     <h2>Фильтрация выданных картриджей</h2>
     <form method="get">
         <input type="text" name="filter_fio" placeholder="ФИО" value="<?= htmlspecialchars($_GET['filter_fio'] ?? '') ?>">
@@ -446,42 +267,45 @@ $rows = $stmt->fetchAll();
         <input type="date" name="end_date" value="<?= htmlspecialchars($_GET['end_date'] ?? '') ?>">
         
         <button type="submit">Применить фильтр</button>
-    </form>
-
+        </form>
+    </div>
+    
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+    
+    <div class="form-block">
     <h2>Выдача картриджа</h2>
     <form method="post">
         <!-- Поле ФИО -->
         <input type="text" name="full_name" placeholder="ФИО получателя" required>
 
-        <!-- Подразделение -->
-        <select name="departament" id="departament" required>
-            <option value="">Выберите подразделение</option>
-            <?php foreach ($departments as $dep): ?>
-                <option value="<?= htmlspecialchars($dep['name']) ?>">
-                    <?= htmlspecialchars($dep['name']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <!-- Кнопка для добавления нового подразделения -->
-        <input type="text" id="new_departament" name="new_departament" placeholder="Новое подразделение" style="display:none;">
-        <button type="button" onclick="toggleInput('departament')">Добавить подразделение</button>
+       <!-- Подразделение -->
+<div class="inline-group">
+    <select name="departament" id="departament" required>
+        <option value="">Выберите подразделение</option>
+        <?php foreach ($departments as $dep): ?>
+            <option value="<?= htmlspecialchars($dep['name']) ?>">
+                <?= htmlspecialchars($dep['name']) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <input type="text" id="new_departament" name="new_departament" placeholder="Новое подразделение" style="display:none;">
+    <button type="button" onclick="toggleInput('departament')">Добавить подразделение</button>
+</div>
 
-        <br><br>
+<!-- Объект -->
+<div class="inline-group">
+    <select name="location" id="location" required>
+        <option value="">Выберите объект</option>
+        <?php foreach ($objects as $obj): ?>
+            <option value="<?= htmlspecialchars($obj['name']) ?>">
+                <?= htmlspecialchars($obj['name']) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <input type="text" id="new_location" name="new_location" placeholder="Новый объект" style="display:none;">
+    <button type="button" onclick="toggleInput('location')">Добавить объект</button>
+</div>
 
-        <!-- Объект -->
-        <select name="location" id="location" required>
-            <option value="">Выберите объект</option>
-            <?php foreach ($objects as $obj): ?>
-                <option value="<?= htmlspecialchars($obj['name']) ?>">
-                    <?= htmlspecialchars($obj['name']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <!-- Кнопка для добавления нового объекта -->
-        <input type="text" id="new_location" name="new_location" placeholder="Новый объект" style="display:none;">
-        <button type="button" onclick="toggleInput('location')">Добавить объект</button>
-
-        <br><br>
 
         <!-- Выбор картриджа -->
         <select name="model" required>
@@ -505,8 +329,9 @@ $rows = $stmt->fetchAll();
         
         <!-- Кнопка отправки -->
         <button type="submit" name="issue_cartridge">Выдать</button>
-    </form>
-
+        </form>
+    </div>
+    
     <script>
         // Функция для показа/скрытия выезжающего меню
         function toggleMenu() {
@@ -532,7 +357,8 @@ $rows = $stmt->fetchAll();
             }
         }
     </script>
-
+    
+    <div class="form-block">
     <h2>Поступление картриджа</h2>
     <form method="post">
         <select name="consumable_id" required>
@@ -549,24 +375,60 @@ $rows = $stmt->fetchAll();
         <input type="hidden" name="action" value="receive_cartridge">
         
         <button type="submit" name="receive_cartridge">Принять</button>
-    </form>
+        </form>
+    </div>
     
-     <h2><a href="#" onclick="
+    <?php endif; ?>
+    
+    <h2 style="text-align: center;">Список выданных картриджей</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Подразделение</th>
+            <th>Объект</th>
+            <th>Модель</th>
+            <th>Дата</th>
+            <th>Количество</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($cartridges as $row): ?>
+            <tr>
+                <td><?= htmlspecialchars($row['fio']) ?></td>
+                <td><?= htmlspecialchars($row['department']) ?></td>
+                <td><?= htmlspecialchars($row['location']) ?></td>
+                <td><?= htmlspecialchars($row['model']) ?></td>
+                <td><?= htmlspecialchars($row['date']) ?></td>
+                <td><?= htmlspecialchars($row['quantity']) ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+    
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+    
+   <h2 style="text-align: center;">
+    <a href="#" onclick="
         const el = document.getElementById('summary');
         el.style.display = (el.style.display === 'none') ? 'block' : 'none';
-        return false;">Показать / скрыть остаток по картриджам</a></h2>
-    <div id="summary" class="summary-table">
-        <table border="1">
-            <tr><th>Картриджи</th><th>Количество</th><th>Обновлено</th></tr>
-            <?php foreach ($summary as $row): ?>
-                <tr>
-                    <td><?= htmlspecialchars($row['material_name']) ?></td>
-                    <td><?= $row['quantity'] ?></td>
-                    <td><?= date('d.m.Y H:i', strtotime($row['record_date'])) ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
+        return false;" style="font-size: 40px;">
+        Показать / скрыть остаток по картриджам
+    </a>
+</h2>
+
+<div id="summary" class="summary-table" style="display: none;">
+    <table border="1">
+        <tr><th>Картриджи</th><th>Количество</th><th>Обновлено</th></tr>
+        <?php foreach ($summary as $row): ?>
+            <tr>
+                <td><?= htmlspecialchars($row['material_name']) ?></td>
+                <td><?= $row['quantity'] ?></td>
+                <td><?= date('d.m.Y H:i', strtotime($row['record_date'])) ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
     
         <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -611,5 +473,10 @@ $rows = $stmt->fetchAll();
         return false;
     }
     </script>
+    
+    <?php endif; ?>
+    
+    <h1>ㅤ</h1>
+    <h1>ㅤ</h1>
 </body>
 </html>

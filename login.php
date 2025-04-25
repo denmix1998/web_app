@@ -42,18 +42,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="form-block">
 <div class="login-container">
     <h2>Вход</h2>
 
     <?php if (!empty($error)): ?>
         <p class="error-message"><?= htmlspecialchars($error) ?></p>
     <?php endif; ?>
-
+    
     <form method="POST" class="login-form">
         <input type="text" name="username" placeholder="Имя пользователя" required>
         <input type="password" name="password" placeholder="Пароль" required>
         <button type="submit">Войти</button>
     </form>
+    
+</div>
 </div>
 </body>
 </html>

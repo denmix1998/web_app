@@ -1,27 +1,46 @@
-/* style.css */
-
-/* Общие стили */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
+.summary-table {
+    display: none;
+    margin-top: 10px;
 }
 
-.error { 
-    color: red; 
-}
-.success { 
-    color: green; 
+.cell-in {
+    background-color: #d4edda; /* светло-зелёный */
+    color: #155724;
+    font-weight: bold;
 }
 
-/* Шапка */
+.cell-out {
+    background-color: #f8d7da; /* светло-красный */
+    color: #721c24;
+    font-weight: bold;
+}
+
+.inline-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap; /* перенос на мобильных */
+}
+
+.inline-group select,
+.inline-group input[type="text"],
+.inline-group button {
+    flex: none; /* чтобы элементы не растягивались */
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
 }
 
 .header a {
@@ -41,58 +60,6 @@ body {
     background-color: #ddd;
 }
 
-/* Контейнер */
-.container {
-    margin: 20px;
-    padding: 15px;
-}
-
-/* Формы */
-.form-group {
-    margin-bottom: 15px;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-/* Таблицы */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-/* Меню */
 .menu {
     position: fixed;
     top: 0;
@@ -121,23 +88,95 @@ th {
     position: fixed;
     top: 20px;
     left: 20px;
-    background-color: #166bd9;
+    background-color: #1f6dd1;
     color: white;
     padding: 10px;
     font-size: 20px;
     cursor: pointer;
     z-index: 1001;
-    border: none;
+}
+
+.container {
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+h1, .welcome {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.form-block {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.form-block h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    border: 1px solid #ddd;
     border-radius: 4px;
+    max-width: 100%;
 }
 
-/* Сводная таблица */
-.summary-table {
-    display: none;
-    margin-top: 10px;
+button {
+    padding: 10px 20px;
+    background-color: #2e89ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    max-width: 100%;
 }
 
-/* Адаптивность */
+button:hover {
+    background-color: #1c6cd5;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+.success {
+    color: green;
+    font-size: 14px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
@@ -174,7 +213,7 @@ th {
     th, td {
         padding: 8px;
     }
-    
+
     .header a {
         font-size: 14px;
         padding: 5px 10px;
@@ -199,5 +238,15 @@ th {
 
     .menu a {
         font-size: 16px;
+    }
+}
+
+@media (min-width: 769px) {
+    input, select {
+        max-width: 400px;
+    }
+
+    button {
+        max-width: 200px;
     }
 }

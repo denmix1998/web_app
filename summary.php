@@ -83,7 +83,6 @@ ksort($materials);
 </head>
 <body>
     <h1>Статистика по расходным материалам</h1>
-    <a href="index.php">Назад</a>
 
     <form method="get">
         <label>С:</label>
@@ -102,17 +101,14 @@ ksort($materials);
             <th>Остаток</th>
         </tr>
         <?php foreach ($materials as $name => $_): ?>
-            <tr>
-                <td><?= htmlspecialchars($name) ?></td>
-                <td><?= $inMap[$name] ?? 0 ?></td>
-                <td><?= $outMap[$name] ?? 0 ?></td>
-                <td><?= $currentData[$name] ?? 0 ?></td>
-            </tr>
+<tr>
+    <td><?= htmlspecialchars($name) ?></td>
+    <td class="cell-in"><?= $inMap[$name] ?? 0 ?></td>
+    <td class="cell-out"><?= $outMap[$name] ?? 0 ?></td>
+    <td><?= $currentData[$name] ?? 0 ?></td>
+</tr>
         <?php endforeach; ?>
     </table>
-
-    <h2>График</h2>
-    <canvas id="summaryChart" width="800" height="400"></canvas>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {

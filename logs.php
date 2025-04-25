@@ -74,6 +74,7 @@ $logs = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title>Журнал действий</title>
+        <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
@@ -87,6 +88,7 @@ $logs = $stmt->fetchAll();
     </style>
 </head>
 <body>
+        <a href="index.php" class="back-link">← Назад</a>
     <h2>Журнал действий пользователей</h2>
     
     <div class="filter-section">
@@ -130,7 +132,5 @@ $logs = $stmt->fetchAll();
             <?php endforeach; ?>
         <?php endif; ?>
     </table>
-    
-    <a href="index.php" class="back-link">← Назад</a>
 </body>
 </html>
